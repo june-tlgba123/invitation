@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Something Special 👀</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #1b1b1b,
+        #303030
+    );
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* Main screen */
+
+#main {
+    transition: 1s;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+button {
+    border: none;
+    padding: 16px 30px;
+
+    border-radius: 30px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #ffd21c;
+    color: #222;
+
+    box-shadow: 0 0 20px rgba(255,210,28,.5);
+
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+
+/* Surprise screen */
+
+#surprise {
+    position: fixed;
+
+    inset: 0;
+
+    background: #000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    z-index: 100;
+}
+
+
+/* Minion */
+
+.minion {
+    position: relative;
+
+    width: 180px;
+    height: 260px;
+
+    background: #ffd21c;
+
+    border-radius: 90px 90px 45px 45px;
+
+    animation: appear .5s ease;
+}
+
+
+/* Hair */
+
+.hair {
+    position: absolute;
+
+    width: 15px;
+    height: 40px;
+
+    background: #222;
+
+    top: -25px;
+    left: 50%;
+
+    transform: translateX(-50%) rotate(10deg);
+}
+
+
+/* Eye */
+
+.eye {
+    position: absolute;
+
+    width: 65px;
+    height: 65px;
+
+    background: white;
+
+    border: 10px solid #555;
+
+    border-radius: 50%;
+
+    top: 55px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.pupil {
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    background: #111;
+
+    border-radius: 50%;
+
+    top: 12px;
+    left: 12px;
+}
+
+
+/* Mouth */
+
+.mouth {
+    position: absolute;
+
+    width: 80px;
+    height: 35px;
+
+    background: #111;
+
+    border-radius: 0 0 50px 50px;
+
+    bottom: 55px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+
+/* Clothes */
+
+.overall {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+    height: 75px;
+
+    background: #2874d0;
+
+    border-radius: 0 0 45px 45px;
+}
+
+
+/* Arms */
+
+.arm {
+    position: absolute;
+
+    width: 25px;
+    height: 100px;
+
+    background: #ffd21c;
+
+    top: 130px;
+}
+
+.left {
+    left: -25px;
+    transform: rotate(20deg);
+}
+
+.right {
+    right: -25px;
+    transform: rotate(-20deg);
+}
+
+
+/* Text */
+
+#message {
+    font-size: 32px;
+
+    margin-top: 30px;
+
+    color: #ffd21c;
+
+    animation: shake .4s infinite;
+}
+
+
+/* Animations */
+
+@keyframes appear {
+
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+@keyframes shake {
+
+    0% { transform: translateX(0); }
+
+    25% { transform: translateX(-5px); }
+
+    50% { transform: translateX(5px); }
+
+    75% { transform: translateX(-5px); }
+
+    100% { transform: translateX(0); }
+
+}
+
+
+/* Flash */
+
+#flash {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    z-index: 200;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- Main -->
+
+<div id="main">
+
+    <h1>🤔unsa kahay sulod?...</h1>
+
+    <p>Are you brave enough to find out?</p>
+
+    <br>
+
+    <button onclick="surprise()">
+        TUPLOKA RA GUD
+    </button>
+
+</div>
+
+
+
+<!-- Flash -->
+
+<div id="flash"></div>
+
+
+
+<!-- Surprise -->
+
+<div id="surprise">
+
+    <div class="minion">
+
+        <div class="hair"></div>
+
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+
+        <div class="mouth"></div>
+
+        <div class="overall"></div>
+
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+
+    </div>
+
+
+    <div id="message">
+        BANANA!!! 🍌 
+      
+    <p style="font-size: 16px;">You are invited to Ronel's birthday tomorrow, walay saging pero naay lechon</p>
+    </div>
+
+
+    <button onclick="again()" style="margin-top:16px;">
+       usa pa? ayaw sigeg palabi oy, pero sige nalang
+    </button>
+
+</div>
+
+
+
+<script>
+
+function surprise() {
+
+    const flash =
+        document.getElementById("flash");
+
+    const main =
+        document.getElementById("main");
+
+    const surprise =
+        document.getElementById("surprise");
+
+
+    /* Flash effect */
+
+    flash.style.opacity = "1";
+
+
+    setTimeout(() => {
+
+        flash.style.opacity = "0";
+
+        main.style.display = "none";
+
+        surprise.style.display = "flex";
+
+    }, 150);
+
+
+    /* Try to make a funny sound */
+
+    playSound();
+
+}
+
+
+/* Funny sound using Web Audio */
+
+function playSound() {
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if (!AudioContext) return;
+
+    const audio =
+        new AudioContext();
+
+    const oscillator =
+        audio.createOscillator();
+
+    const gain =
+        audio.createGain();
+
+
+    oscillator.connect(gain);
+
+    gain.connect(audio.destination);
+
+
+    oscillator.type = "square";
+
+    oscillator.frequency.setValueAtTime(
+        500,
+        audio.currentTime
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        120,
+        audio.currentTime + 0.5
+    );
+
+
+    gain.gain.setValueAtTime(
+        0.3,
+        audio.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.01,
+        audio.currentTime + 0.5
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        audio.currentTime + 0.5
+    );
+
+}
+
+
+/* Again button */
+
+function again() {
+
+    document.getElementById("surprise")
+        .style.display = "none";
+
+    document.getElementById("main")
+        .style.display = "block";
+
+}
+
+</script>
+
+
+</body>
+</html>
